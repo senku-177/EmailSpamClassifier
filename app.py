@@ -3,11 +3,13 @@ import pickle
 import string
 from nltk.corpus import stopwords
 import nltk
-nltk.download('punkt')
+import os
 from nltk.stem.porter import PorterStemmer
 
 ps = PorterStemmer()
 
+if not os.path.exists(os.path.join(nltk.data.find('tokenizers'), 'punkt')):
+    nltk.download('punkt')
 
 def transform_text(text):
     text = text.lower()
