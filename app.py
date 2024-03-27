@@ -2,13 +2,20 @@ import streamlit as st
 import pickle
 import string
 import nltk
-nltk.download('stopwords')
+
 from nltk.corpus import stopwords
 
 import os
 from nltk.stem.porter import PorterStemmer
 
 ps = PorterStemmer()
+
+nltk_data_path = os.path.join(os.path.expanduser('~'), 'nltk_data')
+if not os.path.exists(os.path.join(nltk_data_path, 'corpora', 'stopwords')):
+    try:
+        nltk.data.find('corpora/stopwords')
+    except LookupError:
+        nltk.download('stopwords', download_dir=nltk_data_path)
 
 nltk_data_path = os.path.join(os.path.expanduser('~'), 'nltk_data')
 if not os.path.exists(os.path.join(nltk_data_path, 'tokenizers', 'punkt')):
