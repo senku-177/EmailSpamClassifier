@@ -8,8 +8,15 @@ from nltk.stem.porter import PorterStemmer
 
 ps = PorterStemmer()
 
-if not os.path.exists(os.path.join(nltk.data.find('tokenizers'), 'punkt')):
-    nltk.download('punkt')
+nltk_data_path = os.path.join(os.path.expanduser('~'), 'nltk_data')
+if not os.path.exists(os.path.join(nltk_data_path, 'tokenizers', 'punkt')):
+    try:
+        nltk.data.find('tokenizers/punkt')
+    except LookupError:
+        nltk.download('punkt', download_dir=nltk_data_path)
+
+# Other imports and code for your application
+
 
 def transform_text(text):
     text = text.lower()
